@@ -6,6 +6,9 @@
     <meta name="layout" content="main"/>
     <title>Demonstration of OpenID Connect in Grail 5</title>
 </head>
+
+<body>
+
 <div id="content" role="main">
     <div class="container">
         <section class="row colset-2-its">
@@ -20,7 +23,6 @@
         </section>
     </div>
 </div>
-<body>
 
 </body>
 </html>

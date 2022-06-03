@@ -145,3 +145,8 @@ grails:
     plugin:
         springsecurity:
             securityConfigType: "Annotation"
+        userLookup:
+            userDomainClassName:  'openidconnect.User'
+            authorityJoinClassName: 'openidconnect.UserRole'
+        authority:
+            className: 'openidconnect.Role'
