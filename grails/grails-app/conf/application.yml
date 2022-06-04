@@ -141,12 +141,18 @@ environments:
                 testOnReturn: false
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
+---
 grails:
     plugin:
         springsecurity:
             securityConfigType: "Annotation"
-        userLookup:
-            userDomainClassName:  'openidconnect.User'
-            authorityJoinClassName: 'openidconnect.UserRole'
-        authority:
-            className: 'openidconnect.Role'
+            userLookup:
+                userDomainClassName:  'openidconnect.User'
+                authorityJoinClassName: 'openidconnect.UserRole'
+            authority:
+                className: 'openidconnect.Role'
+---
+environments:
+    development:
+        grails:
+            serverURL: "https://localhost:8888"

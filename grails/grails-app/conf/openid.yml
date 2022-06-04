@@ -1,0 +1,23 @@
+# put this somewhere safe and use .... to include it in the project at runtime
+rm:
+    openid:
+        microsoft:
+            clientid: secret11
+            redirect_uri: https%3A%2F%2Flocalhost%3A8888%2Flogin%2Foauth2%2Fcode%2Fmicrosoft
+            scope: openid
+            keys_host: https://login.microsoftonline.com/
+            keys_uri: /common/discovery/v2.0/keys
+            keys_url: https://login.microsoftonline.com/common/discovery/v2.0/keys
+            issuer: https://login.microsoftonline.com/9188040d-6c67-4c5b-b112-36a304b66dad/v2.0
+            audience: secret12
+        google:
+            clientid: secret21
+            clientsecret: secret22
+            redirect_uri: https://localhost:8888/login/oauth2/code/google
+            scope: openid
+            keys_host: https://www.googleapis.com/
+            keys_uri: /oauth2/v2/certs
+            keys_url: https://www.googleapis.com/oauth2/v2/certs
+            issuer: https://accounts.google.com
+            audience: secret23
+
