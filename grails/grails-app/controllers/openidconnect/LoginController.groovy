@@ -13,6 +13,11 @@ class LoginController {
         render(view: "login", model: map)
     }
 
+    def logout() {
+        request.logout()
+        redirect(controller: 'content', action: 'index')
+    }
+
     @Secured(value=["hasRole('ROLE_ANONYMOUS')"])
     def denied() {
         def map = []

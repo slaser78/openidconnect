@@ -7,7 +7,7 @@
         <g:layoutTitle default="OpenID Connect"/>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
+    <asset:link rel="icon" href="openid-16x16.gif" type="image/x-ico"/>
     <asset:stylesheet src="application.css"/>
     <g:layoutHead/>
 </head>

@@ -106,3 +106,11 @@ Good luck!
 
 ## Connecting OpenID Connect to Grails Spring Security
 
+After the call to the OpenID Connect provider (here microsoft or google) and a successfull 
+authentication the provider calls back with something that after a verification is turned 
+into a token. This token uniquely represents one authenticated user. 
+The token is stored in a User object that is used by grails-spring-security to represents 
+the user in this session. This logic is implemented by the method OpenIDController.loginByToken(token).
+
+
+

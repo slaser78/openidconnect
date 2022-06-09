@@ -45,7 +45,13 @@ class OpenIDController {
     def ms_oauth2callback() {
         // get the user/id_token from the microsoft answer and verify it into the unique user token.
         String id_token = params["id_token"]
+        if(!id_token) {
+            throw new IllegalAccessException("Illegal id_token parameter in OpenID Connect callback")
+        }
         String token = openIDService.verify("ms", id_token)
+        if(!token) {
+            throw new IllegalAccessException("Illegal token parameter in OpenID Connect callback")
+        }
 
         loginByToken(token)
 
@@ -76,6 +82,9 @@ class OpenIDController {
     @Secured(value=["hasRole('ROLE_ANONYMOUS')"])
     def google_oauth2callback() {
         String auth_code = request.getParameter('code')
+        if(!auth_code) {
+            throw new IllegalAccessException("No code parameter in OpenID Connect callback")
+        }
         String client_id = grailsApplication.config.getProperty('rm.openid.google.clientid')
         String client_secret = grailsApplication.config.getProperty('rm.openid.google.clientsecret')
         String redirect_uri = grailsApplication.config.getProperty('rm.openid.google.redirect_uri')
@@ -96,6 +105,9 @@ class OpenIDController {
         def map = new JsonSlurper().parseText(resp.body())
         String id_token = map["id_token"]
         String token = openIDService.verify("google", id_token)
+        if(!token) {
+            throw new IllegalAccessException("Illegal code parameter in OpenID Connect callback")
+        }
 
         loginByToken(token)
 

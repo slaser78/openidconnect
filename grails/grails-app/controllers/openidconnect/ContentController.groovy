@@ -17,4 +17,17 @@ class ContentController {
         ]
         render(view: "index", model: map)
     }
+
+    @Secured(value=["hasRole('ROLE_admin')"])
+    def secret() {
+        def username = "unknown"
+        if(springSecurityService.principal) {
+            username = springSecurityService.principal.username
+        }
+        def map = [
+                username: username
+        ]
+        render(view: "secret", model: map)
+    }
+
 }

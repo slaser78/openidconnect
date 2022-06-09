@@ -19,9 +19,18 @@
                 OpenID Connect based exchange or you are rememebered having login
                 not to long ago.
             </p>
-
+            <p>
+                <a href="./secret">Watch this very secret text.</a>
+            </p>
+<g:form useToken="true" class="form-horizontal" name="openidForm">
+    <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-8">
+                    <button type='submit' class="btn btn-success" id="submit" value='Logout' formaction="/logout" >Logout</button>
+                </div>
+            </div>
         </section>
     </div>
+</g:form>
 </div>
 
 </body>
