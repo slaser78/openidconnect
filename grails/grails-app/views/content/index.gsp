@@ -12,7 +12,7 @@
 <div id="content" role="main">
     <div class="container">
         <section class="row colset-2-its">
-            <h1>Real Content</h1>
+            <h1>Welcome User: ${username} </h1>
 
             <p>
                 When you view this content you have either logged in using an

@@ -3,15 +3,32 @@ package openidconnect
 import grails.core.GrailsApplication
 import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.boot.autoconfigure.security.servlet.SecurityFilterAutoConfiguration
+import org.springframework.security.web.FilterChainProxy
+
+import javax.servlet.Filter
 
 class OpenIDController {
 
     GrailsApplication grailsApplication
     SpringSecurityService springSecurityService
     OpenIDService openIDService
+    UserService userService
+
+    @Autowired
+    @Qualifier("springSecurityFilterChain")
+    private Filter springSecurityFilterChain;
 
     @Secured(value=["hasRole('ROLE_ANONYMOUS')"])
     def ms_oauth2() {
+        FilterChainProxy filterChainProxy = (FilterChainProxy) springSecurityFilterChain;
+        List<SecurityFilterAutoConfiguration> list = filterChainProxy.getFilterChains();
+        list.stream()
+                .flatMap(chain -> chain.getFilters().stream())
+                .forEach(filter -> System.out.println(filter.getClass()));
+
         // calculate the (complex) microsoft OpenID Connect authorisation URL.
         withForm {
             String token = "token"
@@ -42,12 +59,9 @@ class OpenIDController {
         String token = openIDService.verify("ms", id_token)
 
         // find (and create if needed) the user belonging to this token
-        User user = User.findByToken(token)
-        if (user == null) {
-            User.withTransaction { status ->
-                user = new User(username: "user", password: "dummy", token: token)
-                user.save(flush: true, failOnError: true)
-            }
+        User user = userService.findUser(token)
+        if(!user) {
+            user = userService.createUser(token)
         }
 
         // login this user with spring-security

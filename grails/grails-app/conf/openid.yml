@@ -1,4 +1,5 @@
-# put this somewhere safe and use .... to include it in the project at runtime
+# put this somewhere safe (/etc/openidconnect?) and use the SPRING_CONFIG_ADDITIONAL_LOCATION environment variable
+# to include it in the project at runtime. You do not want your secrets on GitHub.
 rm:
     openid:
         microsoft:
