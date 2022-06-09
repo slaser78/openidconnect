@@ -14,6 +14,9 @@
         <div class="col-sm-offset-4 col-sm-8">
             <button type='submit' class="btn btn-success" id="submit" value='Microsoft' formaction="/login/oauth2/code/microsoft/init" >Microsoft</button>
         </div>
+        <div class="col-sm-offset-4 col-sm-8">
+            <button type='submit' class="btn btn-success" id="submit" value='Google' formaction="/login/oauth2/code/google/init" >Google</button>
+        </div>
     </div>
 </g:form>
 

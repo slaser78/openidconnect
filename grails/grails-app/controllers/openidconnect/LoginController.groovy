@@ -1,8 +1,11 @@
 package openidconnect
 
+import grails.plugin.springsecurity.SpringSecurityService
 import grails.plugin.springsecurity.annotation.Secured
 
 class LoginController {
+
+    SpringSecurityService springSecurityService
 
     @Secured(value=["hasRole('ROLE_ANONYMOUS')"])
     def auth() {
