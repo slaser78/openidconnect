@@ -37,7 +37,7 @@ $ grails s2-quickstart openidconnect User Role
 ```
 This will add the Model objects in 'grails-app/domain/openidconnect/*.groovy'.
 It will however also use password and configuration stuff that is not used in this project
-and which was removed for this demonstration app.
+and which was removed from this demonstration app.
 In the end, after modifying the modifications of 's2-quickstart', only 'Role.groovy', 'User.groovy', 'UserRole.groovy' 
 were added and the following lines were added to 'conf/application.yml':
 
@@ -72,7 +72,7 @@ that is called when microsoft indicates the user has been authenticated (ms_oaut
 
 ## External configuration for OpenID
 
-As can be seen in the OpenIDController several configuration variables are required to use an
+As can be seen in the OpenIDMicrosoftController several configuration variables are required to use an
 OpenID Connect service such as that from microsoft. Some of these configuration variables 
 are confident and should not be stored in the main configuration file. Grails allows you 
 to store such variables in an external configuration file that is pointed to by the
@@ -103,6 +103,17 @@ You get these secret for your application by registering it at microsoft in the 
 * New Registration
 
 Good luck!
+
+## JSON Web Token (JWT) or id_token
+
+The OpenID Connect provider inserts an id_token in the successfull authentication callback. This id_token
+does not directly uniquely identifies a user. Instead, it needs to be decoded first.
+During this decoding the correct public key of Mthe OpenID Connect provider is needed plus some complex
+cryptgraphical libraries. The collecting of keys and the calling of the cryptographical libaries is 
+done in OpenIDService.
+
+When the id_token is successfully decoded and turns up a subject/user_token we trust that subject and
+find/create/login a user based on this trust.
 
 ## Connecting OpenID Connect to Grails Spring Security
 

@@ -16,10 +16,10 @@ class UrlMappings {
         "/logout"(controller: "Login", action: "logout")
 
         //OpenID entry-points
-        "/login/oauth2/code/microsoft/init"(controller: "OpenID", action: "ms_oauth2")
-        "/login/oauth2/code/microsoft"(controller: "OpenID", action: "ms_oauth2callback")
-        "/login/oauth2/code/google/init"(controller: "OpenID", action: "google_oauth2")
-        "/login/oauth2/code/google"(controller: "OpenID", action: "google_oauth2callback")
+        "/login/oauth2/code/microsoft/init"(controller: "OpenIDMicrosoft", action: "ms_oauth2")
+        "/login/oauth2/code/microsoft"(controller: "OpenIDMicrosoft", action: "ms_oauth2callback")
+        "/login/oauth2/code/google/init"(controller: "OpenIDGoogle", action: "google_oauth2")
+        "/login/oauth2/code/google"(controller: "OpenIDGoogle", action: "google_oauth2callback")
 
         // support views
         "500"(view:'/error')

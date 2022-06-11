@@ -1,6 +1,10 @@
 package openidconnect
 
+import grails.plugin.springsecurity.SpringSecurityService
+
 class UserService {
+
+    SpringSecurityService springSecurityService
 
     // this is called from Bootstrap
     void bootstrapInitialize() {
@@ -32,5 +36,17 @@ class UserService {
             return user
         }
     }
+
+
+    void loginByToken(String token) {
+        // find (and create if needed) the user belonging to this token
+        User user = findUser(token)
+        if(!user) {
+            user = createUser(token)
+        }
+        // login this user with spring-security
+        springSecurityService.reauthenticate(user.username)
+    }
+
 
 }
