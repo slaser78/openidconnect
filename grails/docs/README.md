@@ -94,13 +94,19 @@ rm:
             issuer: https://login.microsoftonline.com/`secret12`/v2.0
             audience: `secret13`
 ```
-You get these secret for your application by registering it at microsoft in the following location:
+You get these secret for your application by registering with the provider. For Microsoft use the following location:
 
 * https://portal.azure.com
 * App Services
 * Manage Azure Active Directory
 * App Registrations
 * New Registration
+
+For creating the credentials in the Google Cloud go to:
+
+* https://console.cloud.google.com
+* APIs & Services
+* Credentials
 
 Good luck!
 
