@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+# Demonstrate OpenIDConnect in Python/Flask
+import argparse
+import os
+import sys
+
+import flask
+
+# discover paths
+scriptpath = os.path.dirname(__file__)
+modpath = os.path.abspath(os.path.join(scriptpath, os.pardir))
+os.chdir(modpath)
+sys.path.insert(0, modpath)
+
+
+def main(args):
+    # Initialise Flask and import the files with REST calls (do not remove!!!)
+    import openidconnect.view
+
+    openidconnect.view.app = flask.Flask(__name__,
+                                         static_url_path='/static',
+                                         static_folder=os.path.join(modpath, 'web/static'),
+                                         template_folder=os.path.join(modpath, 'web/templates'))
+
+    # import the rest calls (in order)
+    import openidconnect.view.root
+
+    # only use the internal FLASK webserver in the development environment.
+    # otherwise see: https://flask.palletsprojects.com/en/2.0.x/deploying/
+    context = (os.path.join(scriptpath, './cert/server.cert'), os.path.join(scriptpath, './cert/server.key'))
+    openidconnect.view.app.run(
+        debug=True,
+        use_reloader=False,
+        ssl_context=context
+    )
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='OpenIDConnect in Python/Flask.')
+    parser.add_argument("--debug", type=bool,  default=False, help="output debugging information")
+    args = parser.parse_args()
+
+    main(args)
+

@@ -1,0 +1,12 @@
+# Framework
+Flask
+
+# SSL support
+pyOpenSSL
+
+# outgoing REST calls
+httpx[http2]
+
+# Development Support
+black
+flake8

@@ -1,0 +1,65 @@
+body,
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+}
+
+.layer1 {
+    position: absolute;
+    /* z-index: 4; */
+    left: 0;
+    top: 0;
+}
+.normals a {
+    color: white;
+    text-decoration: none;
+}
+
+
+.intro-header {
+    position: relative;
+    min-height:400px;
+    padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url('../img/intro-bg.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+.intro-header h1,h3,p {
+    text-shadow: 0 2px 8px #2c2b39;
+}
+
+.intro-descr {
+    font-size:16px;
+    margin-top:100px;
+}
+
+.for-hire {
+    position: absolute;
+    z-index: 5;
+    right: 30px;
+    width: 200px;
+    height: 200px;
+    background-image: url('../img/for-hire-olive.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 0 -20px;
+}
+
+.content-section-a {
+    padding: 50px 0;
+    background-color: #f8f8f8;
+}
