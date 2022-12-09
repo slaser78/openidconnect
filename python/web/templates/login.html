@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}OpenIDConnect{% endblock %}
+
+{% block head %}
+{{ super() }}
+<link href="{{ url_for('static', filename='./css/front.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="intro-header">
+    <div class="container">
+        <form action="/login" method="get">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="submit" formaction="{{url_for('google_oauth2')}}" class="btn btn-secondary">Google</button>
+                        <button type="submit" formaction="{{url_for('ms_oauth2')}}" class="btn btn-secondary">Microsoft</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <p>OpenIDConnect {{session['userid']}}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

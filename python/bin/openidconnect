@@ -3,8 +3,11 @@
 import argparse
 import os
 import sys
+import json
 
 import flask
+from flask_wtf.csrf import CSRFProtect
+
 
 # discover paths
 scriptpath = os.path.dirname(__file__)
@@ -21,14 +24,22 @@ def main(args):
                                          static_url_path='/static',
                                          static_folder=os.path.join(modpath, 'web/static'),
                                          template_folder=os.path.join(modpath, 'web/templates'))
+    openidconnect.view.app.config.from_file(args.config, load=json.load)
+    openidconnect.view.app.csrf = CSRFProtect(openidconnect.view.app)
+
 
     # import the rest calls (in order)
     import openidconnect.view.root
+    import openidconnect.oauth2.google
+    import openidconnect.oauth2.microsoft
+    import openidconnect.oauth2.startup
 
     # only use the internal FLASK webserver in the development environment.
     # otherwise see: https://flask.palletsprojects.com/en/2.0.x/deploying/
     context = (os.path.join(scriptpath, './cert/server.cert'), os.path.join(scriptpath, './cert/server.key'))
     openidconnect.view.app.run(
+        host=args.host,
+        port=args.port,
         debug=True,
         use_reloader=False,
         ssl_context=context
@@ -37,6 +48,9 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='OpenIDConnect in Python/Flask.')
+    parser.add_argument("--host", type=str,  default="localhost", help="host connect")
+    parser.add_argument("--port", type=int,  default=4444, help="port connect")
+    parser.add_argument("--config", type=str,  default="openidconnect.json", help="config veriables")
     parser.add_argument("--debug", type=bool,  default=False, help="output debugging information")
     args = parser.parse_args()
 

@@ -1,10 +1,17 @@
 # Framework
 Flask
 
+# add CSRF protection
+Flask-WTF
+
 # SSL support
 pyOpenSSL
 
+# JSON Web Tokens (JWTs) support
+pyjwt[crypto]
+
 # outgoing REST calls
+requests
 httpx[http2]
 
 # Development Support

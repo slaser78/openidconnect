@@ -14,3 +14,11 @@ def front_page():
     map = {
     }
     return render_template("front.html", **map)
+
+
+@app.route('/login')
+def do_login():
+    map = {
+    }
+    return render_template('login.html', **map)
+
