@@ -1,7 +1,9 @@
 import os
-from flask import render_template, send_from_directory, session
+from flask import render_template, send_from_directory, session, redirect, url_for
 from flask_login import login_required
 from openidconnect import app
+from flask_login import logout_user
+
 
 
 @app.route('/favicon.ico')
@@ -22,6 +24,12 @@ def login():
     map = {
     }
     return render_template('login.html', **map)
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('front_page'))
 
 
 @app.route('/profile')
