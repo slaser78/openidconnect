@@ -22,6 +22,7 @@ def main(args):
 
     openidconnect.csrf = CSRFProtect()
     openidconnect.login_manager = LoginManager()
+    openidconnect.login_manager.login_view = 'login'
     openidconnect.app = flask.Flask(__name__,
                                      static_url_path='/static',
                                      static_folder=os.path.join(modpath, 'web/static'),
