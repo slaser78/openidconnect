@@ -23,13 +23,14 @@ def ms_oauth2():
     ).format(
         request.args['csrf_token'],
         app.config["MICROSOFT_CLIENT_ID"],
-        app.config["MICROSOFT_REDIRECT_URI"],
+        app.config["MICROSOFT_REDIRECT_URL"],
         app.config["MICROSOFT_SCOPE"]
     )
     return redirect(auth_uri)
 
 
 @app.route('/login/oauth2/code/microsoft', methods=['POST'])
+@csrf.exempt
 def ms_oauth2callback():
     id_token = request.form['id_token']
     state = request.form['state']
@@ -41,4 +42,4 @@ def ms_oauth2callback():
     )
     session['credentials'] = decoded
     session['userid'] = decoded['sub']
-    return redirect(url_for('start_page'))
+    return redirect(url_for('front_page'))

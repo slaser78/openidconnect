@@ -20,12 +20,13 @@ def main(args):
     # Initialise Flask and import the files with REST calls (do not remove!!!)
     import openidconnect.view
 
+    openidconnect.view.csrf = CSRFProtect()
     openidconnect.view.app = flask.Flask(__name__,
                                          static_url_path='/static',
                                          static_folder=os.path.join(modpath, 'web/static'),
                                          template_folder=os.path.join(modpath, 'web/templates'))
+    openidconnect.view.csrf.init_app(openidconnect.view.app)
     openidconnect.view.app.config.from_file(args.config, load=json.load)
-    openidconnect.view.app.csrf = CSRFProtect(openidconnect.view.app)
 
 
     # import the rest calls (in order)
@@ -49,7 +50,7 @@ def main(args):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='OpenIDConnect in Python/Flask.')
     parser.add_argument("--host", type=str,  default="localhost", help="host connect")
-    parser.add_argument("--port", type=int,  default=4444, help="port connect")
+    parser.add_argument("--port", type=int,  default=8888, help="port connect")
     parser.add_argument("--config", type=str,  default="openidconnect.json", help="config veriables")
     parser.add_argument("--debug", type=bool,  default=False, help="output debugging information")
     args = parser.parse_args()
