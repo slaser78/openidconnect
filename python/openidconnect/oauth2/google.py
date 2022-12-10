@@ -3,7 +3,8 @@ import requests
 from flask import request, redirect,  session, url_for
 
 from .verify import decode_jwt
-from openidconnect.view import app
+from openidconnect import app
+from openidconnect.user import do_login_user
 
 
 @app.route('/login/oauth2/code/google/init')
@@ -35,6 +36,7 @@ def google_oauth2callback():
         id_token
     )
 
+    user_id = decoded['sub']
     session['credentials'] = decoded
-    session['userid'] = decoded['sub']
-    return redirect(url_for('front_page'))
+    session['userid'] = user_id
+    return do_login_user(user_id)

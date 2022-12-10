@@ -3,7 +3,8 @@ import requests
 from flask import request, redirect,  session, url_for
 import jwt
 from .verify import decode_jwt
-from openidconnect.view import app, csrf
+from openidconnect import app, csrf
+from openidconnect.user import do_login_user
 
 
 @app.route('/login/oauth2/code/microsoft/init')
@@ -40,6 +41,8 @@ def ms_oauth2callback():
         app.config["MICROSOFT_ISSUER"],
         id_token
     )
+
+    user_id = decoded['sub']
     session['credentials'] = decoded
-    session['userid'] = decoded['sub']
-    return redirect(url_for('front_page'))
+    session['userid'] = user_id
+    return do_login_user(user_id)

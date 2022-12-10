@@ -4,7 +4,7 @@ from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import serialization
 import jwt
 
-from openidconnect.view import jwks
+from openidconnect import jwks
 
 
 def ensure_bytes(key):

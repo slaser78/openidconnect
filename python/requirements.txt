@@ -1,6 +1,9 @@
 # Framework
 Flask
 
+# User authentication
+Flask-Login
+
 # add CSRF protection
 Flask-WTF
 

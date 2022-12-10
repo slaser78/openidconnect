@@ -1,6 +1,6 @@
 import json
 import requests
-from openidconnect.view import app, jwks
+from openidconnect import app, jwks
 
 
 @app.before_first_request

@@ -1,6 +1,7 @@
 import os
 from flask import render_template, send_from_directory, session
-from . import app
+from flask_login import login_required
+from openidconnect import app
 
 
 @app.route('/favicon.ico')
@@ -17,8 +18,16 @@ def front_page():
 
 
 @app.route('/login')
-def do_login():
+def login():
     map = {
     }
     return render_template('login.html', **map)
+
+
+@app.route('/profile')
+@login_required
+def profile():
+    map = {
+    }
+    return render_template('profile.html', **map)
 

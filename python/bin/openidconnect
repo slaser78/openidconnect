@@ -7,7 +7,7 @@ import json
 
 import flask
 from flask_wtf.csrf import CSRFProtect
-
+from flask_login import LoginManager
 
 # discover paths
 scriptpath = os.path.dirname(__file__)
@@ -20,16 +20,18 @@ def main(args):
     # Initialise Flask and import the files with REST calls (do not remove!!!)
     import openidconnect.view
 
-    openidconnect.view.csrf = CSRFProtect()
-    openidconnect.view.app = flask.Flask(__name__,
-                                         static_url_path='/static',
-                                         static_folder=os.path.join(modpath, 'web/static'),
-                                         template_folder=os.path.join(modpath, 'web/templates'))
-    openidconnect.view.csrf.init_app(openidconnect.view.app)
-    openidconnect.view.app.config.from_file(args.config, load=json.load)
-
+    openidconnect.csrf = CSRFProtect()
+    openidconnect.login_manager = LoginManager()
+    openidconnect.app = flask.Flask(__name__,
+                                     static_url_path='/static',
+                                     static_folder=os.path.join(modpath, 'web/static'),
+                                     template_folder=os.path.join(modpath, 'web/templates'))
+    openidconnect.csrf.init_app(openidconnect.app)
+    openidconnect.login_manager.init_app(openidconnect.app)
+    openidconnect.app.config.from_file(args.config, load=json.load)
 
     # import the rest calls (in order)
+    import openidconnect.user
     import openidconnect.view.root
     import openidconnect.oauth2.google
     import openidconnect.oauth2.microsoft
@@ -38,7 +40,7 @@ def main(args):
     # only use the internal FLASK webserver in the development environment.
     # otherwise see: https://flask.palletsprojects.com/en/2.0.x/deploying/
     context = (os.path.join(scriptpath, './cert/server.cert'), os.path.join(scriptpath, './cert/server.key'))
-    openidconnect.view.app.run(
+    openidconnect.app.run(
         host=args.host,
         port=args.port,
         debug=True,
