@@ -15,8 +15,3 @@ pyjwt[crypto]
 
 # outgoing REST calls
 requests
-httpx[http2]
-
-# Development Support
-black
-flake8
