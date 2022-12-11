@@ -1,0 +1,22 @@
+{
+  "SECRET_KEY": "my_little_secret",
+
+  "MICROSOFT_CLIENT_ID": "",
+  "MICROSOFT_REDIRECT_URL": "https%3A%2F%2Flocalhost%3A8888%2Flogin%2Foauth2%2Fcode%2Fmicrosoft",
+  "MICROSOFT_SCOPE": "openid",
+  "MICROSOFT_KEYS_HOST": "https://login.microsoftonline.com/",
+  "MICROSOFT_KEYS_URI": "/common/discovery/v2.0/keys",
+  "MICROSOFT_KEYS_URL": "https://login.microsoftonline.com/common/discovery/v2.0/keys",
+  "MICROSOFT_ISSUER": "https://login.microsoftonline.com/9188040d-6c67-4c5b-b112-36a304b66dad/v2.0",
+  "MICROSOFT_AUDIENCE": "85d72273-d5ad-4567-9a5b-dc15d67fb1ba",
+  
+  "GOOGLE_CLIENT_ID": "",
+  "GOOGLE_CLIENT_SECRET": "",
+  "GOOGLE_REDIRECT_URL": "https://localhost:8888/login/oauth2/code/google",
+  "GOOGLE_SCOPE": "openid",
+  "GOOGLE_KEYS_HOST": "https://www.googleapis.com/",
+  "GOOGLE_KEYS_URI": "/oauth2/v2/certs",
+  "GOOGLE_KEYS_URL": "https://www.googleapis.com/oauth2/v2/certs",
+  "GOOGLE_ISSUER": "https://accounts.google.com",
+  "GOOGLE_AUDIENCE": "317729119349-jks92tprtrfuv99khskv7d7l7c57o3hj.apps.googleusercontent.com"
+}

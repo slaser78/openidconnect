@@ -1,5 +1,14 @@
-# OpenID Connect: Create a demo OpenID Connect Grails application
+# Grails/Groovy and OpenID Connect
 
+## Overview
+
+For our Grails OpenID Connect demonstration project we need add-on libraries that provides the following functionality:
+
+1. User/Session representation and page protection (Spring-security)
+2. Encryption support (java-jwt and kwls-rsa)
+3. Outgoing HTTP calls (micronaut-http-client)
+
+The rest of this document describes how to create a working Grails OpenID Connect demonstration project from scratch. 
 
 ## Create a Basic Grails App
 Start with an empty grails 5 project. Create it frome the commandline like this:
@@ -56,70 +65,16 @@ After this the application can be run but access to page /content/index is refus
 login. We will change that by adding OpenID Connect logic to /login/auth.
 
 ## Add OpenID Connect support
-This is not an introduction to OpenID Connect, but the following steps are taken when a user
-is logging in using OpenID Connect:
-
-1. The user is redirected to page '/login/auth' because access to a page is refused.
-2. The user presses (for example) the 'microsoft' button.
-3. The button triggers '/login/oauth2/code/microsoft/init' which redirects the browser to a 'microsoft' login page. 
-4. The user interact with the microsoft login page and authenticates.
-5. After successfull authentication, the microsoft page forwards the browser to local '/login/oauth2/code/microsoft/'.
-6. This local page checks if the returned token matches an existing User and create a new User if it doesn't.
-7. The local page then logs the User in with spring-security and forwards the browser to a secured page.
 
 The OpenIDController contains the methods that are called the button is pressed (ms_oauth2) and the method
 that is called when microsoft indicates the user has been authenticated (ms_oauth2callback).
 
-## External configuration for OpenID
-
-As can be seen in the OpenIDMicrosoftController several configuration variables are required to use an
-OpenID Connect service such as that from microsoft. Some of these configuration variables 
-are confident and should not be stored in the main configuration file. Grails allows you 
-to store such variables in an external configuration file that is pointed to by the
-environment variable SPRING_CONFIG_ADDITIONAL_LOCATION, for example:
+Grails allows you to store the required configuration variables in an external configuration file that is pointed 
+to by the environment variable SPRING_CONFIG_ADDITIONAL_LOCATION, for example:
 ```bash
 SPRING_CONFIG_ADDITIONAL_LOCATION=/etc/openidconnect/openidconnect.yml
 ```
-This file has a content like:
-```yaml
-rm:
-    openid:
-        microsoft:
-            clientid: `secret11`
-            redirect_uri: https%3A%2F%2Flocalhost%3A8888%2Flogin%2Foauth2%2Fcode%2Fmicrosoft
-            scope: openid
-            keys_host: https://login.microsoftonline.com/
-            keys_uri: /common/discovery/v2.0/keys
-            keys_url: https://login.microsoftonline.com/common/discovery/v2.0/keys
-            issuer: https://login.microsoftonline.com/`secret12`/v2.0
-            audience: `secret13`
-```
-You get these secret for your application by registering with the provider. For Microsoft use the following location:
-
-* https://portal.azure.com
-* App Services
-* Manage Azure Active Directory
-* App Registrations
-* New Registration
-
-For creating the credentials in the Google Cloud go to:
-
-* https://console.cloud.google.com
-* APIs & Services
-* Credentials
-
-Good luck!
-
-## JSON Web Token (JWT) or id_token
-
-The OpenID Connect provider inserts an id_token in the successfull authentication callback. This id_token
-does not directly uniquely identifies a user. Instead, it needs to be decoded first.
-During this decoding the correct public key of Mthe OpenID Connect provider is needed plus some complex
-cryptgraphical libraries. The collecting of keys and the calling of the cryptographical libaries is 
-done in OpenIDService.
-
-When the id_token is successfully decoded and turns up a subject/user_token we trust that subject and
-find/create/login a user based on this trust.
+An example of such a file (without the secrets) are [here](./openidconnect.yml).
 
 ## Connecting OpenID Connect to Grails Spring Security
 

@@ -1,0 +1,22 @@
+rm:
+    openid:
+        microsoft:
+            clientid:
+            redirect_uri: https%3A%2F%2Flocalhost%3A8888%2Flogin%2Foauth2%2Fcode%2Fmicrosoft
+            scope: openid
+            keys_host: https://login.microsoftonline.com/
+            keys_uri: /common/discovery/v2.0/keys
+            keys_url: https://login.microsoftonline.com/common/discovery/v2.0/keys
+            issuer: https://login.microsoftonline.com/9188040d-6c67-4c5b-b112-36a304b66dad/v2.0
+            audience: 85d72273-d5ad-4567-9a5b-dc15d67fb1ba
+        google:
+            clientid:
+            clientsecret: 
+            redirect_uri: https://localhost:8888/login/oauth2/code/google
+            scope: openid
+            keys_host: https://www.googleapis.com/
+            keys_uri: /oauth2/v2/certs
+            keys_url: https://www.googleapis.com/oauth2/v2/certs
+            issuer: https://accounts.google.com
+            audience: 317729119349-jks92tprtrfuv99khskv7d7l7c57o3hj.apps.googleusercontent.com
+
