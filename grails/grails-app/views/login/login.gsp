@@ -12,10 +12,7 @@
 <g:form useToken="true" class="form-horizontal" name="openidForm" url="/openID/default">
     <div class="form-group">
         <div class="col-sm-offset-4 col-sm-8">
-            <button type='submit' class="btn btn-success" id="submit" value='Microsoft' formaction="/login/oauth2/code/microsoft/init" >Microsoft</button>
-        </div>
-        <div class="col-sm-offset-4 col-sm-8">
-            <button type='submit' class="btn btn-success" id="submit" value='Google' formaction="/login/oauth2/code/google/init" >Google</button>
+            <button type='submit' class="btn btn-success" id="submit" value='Keycloak' formaction="/login/oauth2/code/keycloak/init" >Keycloak</button>
         </div>
     </div>
 </g:form>

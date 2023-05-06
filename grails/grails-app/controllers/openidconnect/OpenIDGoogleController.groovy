@@ -74,7 +74,6 @@ class OpenIDGoogleController {
         }
 
         userService.loginByToken(token)
-
         redirect(controller: "Content", action: "index")
     }
 }

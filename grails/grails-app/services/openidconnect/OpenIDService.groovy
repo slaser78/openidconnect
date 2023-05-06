@@ -33,7 +33,7 @@ class OpenIDService {
             String host = grailsApplication.config.getProperty('rm.openid.microsoft.keys_host')
             String uri = grailsApplication.config.getProperty('rm.openid.microsoft.keys_uri')
             BlockingHttpClient client = HttpClient.create(host.toURL()).toBlocking()
-            HttpRequest request = HttpRequest.GET(uri)
+            HttpRequest request = HttpRequest.POST(uri)
             HttpResponse<String> resp = client.exchange(request, String)
             client.close()
             def keys = new JsonSlurper().parseText(resp.body())
@@ -54,6 +54,20 @@ class OpenIDService {
             def keys = new JsonSlurper().parseText(resp.body())
             public_keys["google"] = keys["keys"]
             jwk_providers["google"] = new UrlJwkProvider(new URL(grailsApplication.config.getProperty('rm.openid.google.keys_url')))
+            issuers["google"] = grailsApplication.config.getProperty('rm.openid.google.issuer')
+        } catch(Exception ex) {
+        }
+        // get the keycloak keys
+        try {
+            String host = grailsApplication.config.getProperty('rm.openid.keycloak.keys_host')
+            String uri = grailsApplication.config.getProperty('rm.openid.google.keys_uri')
+            BlockingHttpClient client = HttpClient.create(host.toURL()).toBlocking()
+            HttpRequest request = HttpRequest.GET(uri)
+            HttpResponse<String> resp = client.exchange(request, String)
+            client.close()
+            def keys = new JsonSlurper().parseText(resp.body())
+            public_keys["google"] = keys["keys"]
+            jwk_providers["google"] = new UrlJwkProvider(new URL(grailsApplication.config.getProperty('rm.openid.keycloak.keys_url')))
             issuers["google"] = grailsApplication.config.getProperty('rm.openid.google.issuer')
         } catch(Exception ex) {
         }

@@ -16,8 +16,8 @@
 
             <p>
                 When you view this content you have either logged in using an
-                OpenID Connect based exchange or you are rememebered having login
-                not to long ago.
+                OpenID Connect based exchange or you are remembered having login
+                not too long ago.
             </p>
             <p>
                 <a href="./secret">Watch this very secret text.</a>

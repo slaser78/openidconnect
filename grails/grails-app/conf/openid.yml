@@ -14,11 +14,20 @@ rm:
         google:
             clientid: secret21
             clientsecret: secret22
-            redirect_uri: https://localhost:8888/login/oauth2/code/google
+            redirect_uri: https://localhost:8080/login/oauth2/code/google
             scope: openid
             keys_host: https://www.googleapis.com/
             keys_uri: /oauth2/v2/certs
             keys_url: https://www.googleapis.com/oauth2/v2/certs
             issuer: https://accounts.google.com
             audience: secret23
+        keycloak:
+            realm: CvmtRealm
+            clientid: cvmtClientId
+            clientsecret: zZZ2Sk51XvdVaMMF08CQWLwwC8BV9J6n
+            keys_host: http://localhost:8080/realms/CvmtRealm/protocol/openid-connect/token
+            redirect_uri: http://localhost:8081/content
+            scope: openid
+            grant_type: password
+
 
