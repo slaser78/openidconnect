@@ -17,7 +17,7 @@ class UrlMappings {
 
         //OpenID entry-points
         "/login/oauth2/code/keycloak/init"(controller: "OpenIDKeycloak", action: "kc_oauth2")
-        "/login/oauth2/code/keycloak"(controller: "OpenIDKeycloak", action: "kc_oauth2callback")
+        "/login/callback"(controller: "OpenIDKeycloak", action: "kc_oauth2callback")
 
         // support views
         "500"(view:'/error')

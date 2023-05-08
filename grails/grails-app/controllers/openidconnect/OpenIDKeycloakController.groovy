@@ -51,7 +51,7 @@ class OpenIDKeycloakController {
         // calculate the Keycloak OpenID Connect authorization URL.
         withForm {
             String url = """
-        http://localhost:8080/realms/CvmtRealm/protocol/openid-connect/auth
+        http://localhost:8080/realms/cvmtRealm/protocol/openid-connect/auth
         ?response_type=code
         &client_id=$client_id
         """.stripIndent().replaceAll("[\r\n]+", "")
@@ -78,7 +78,6 @@ class OpenIDKeycloakController {
                 "scope"        : "openid"
         ]
         String body = JsonOutput.toJson(data)
-        println "Body: " + body
         String uri = "http://localhost:8080/realms/CvmtRealm/protocol/openid-connect/token"
         SSLContext sslContext = getSslContext()
         Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory> create()
@@ -105,7 +104,7 @@ class OpenIDKeycloakController {
             } finally {
                 response.close()
             }
-            def map = new JsonSlurper().parseText(resp.body())
+            def map = new JsonSlurper().parseText(response.body())
             String id_token = map["id_token"]
             String token = openIDService.verify("keycloak", id_token)
             if (!token) {
