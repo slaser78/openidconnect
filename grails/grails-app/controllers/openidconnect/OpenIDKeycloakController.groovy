@@ -28,32 +28,14 @@ class OpenIDKeycloakController {
     OpenIDService openIDService
     UserService userService
 
-//    Microsoft constants/secrets
-    @Value('${rm.openid.keycloak.clientid}')
-    String client_id
-    @Value('${rm.openid.keycloak.redirect_uri}')
-    String redirect_uri
-    @Value('${rm.openid.keycloak.scope}')
-    String scope
-    @Value('${rm.openid.keycloak.clientsecret}')
-    String client_secret
-    @Value('http://localhost:8080')
-    String host
-    @Value('/token')
-    String token
-    @Value('grant_type')
-    String grant_type
-    @Value('realm')
-    String realm
-
     @Secured(value = ["hasRole('ROLE_ANONYMOUS')"])
     def kc_oauth2() {
         // calculate the Keycloak OpenID Connect authorization URL.
         withForm {
             String url = """
-        http://localhost:8080/realms/cvmtRealm/protocol/openid-connect/auth
+        https://se.scott.mil:8444/realms/cvmtRealm/protocol/openid-connect/auth
         ?response_type=code
-        &client_id=$client_id
+        &client_id="cvmtClient"
         """.stripIndent().replaceAll("[\r\n]+", "")
             println("URL: " + url)
             redirect(url: url)
@@ -72,13 +54,13 @@ class OpenIDKeycloakController {
         Map<String, String> data = [
                 "username"     : "scott",
                 "password"     : "abcd",
-                "client_id"    : client_id,
-                "client_secret": client_secret,
+                "client_id"    : "cvmtClient",
+                "client_secret": "AZMUMFwvzEqXMiAbeQinhIlgpFni41Lo",
                 "grant_type"   : "password",
                 "scope"        : "openid"
         ]
         String body = JsonOutput.toJson(data)
-        String uri = "http://localhost:8080/realms/CvmtRealm/protocol/openid-connect/token"
+        String uri = "https://se.scott.mil/realms/CvmtRealm/protocol/openid-connect/token"
         SSLContext sslContext = getSslContext()
         Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory> create()
                 .register("https", new SSLConnectionSocketFactory(sslContext))

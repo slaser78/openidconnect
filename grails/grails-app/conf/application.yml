@@ -155,4 +155,4 @@ grails:
 environments:
     development:
         grails:
-            serverURL: "https://localhost:8080"
+            serverURL: "https://se.scott.mil:8444"

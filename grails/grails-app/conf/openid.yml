@@ -6,8 +6,8 @@ rm:
             realm: CvmtRealm
             clientid: cvmtClient
             clientsecret: AZMUMFwvzEqXMiAbeQinhIlgpFni41Lo
-            keys_host: http://localhost:8080/realms/cvmtRealm/protocol/openid-connect/token
-            redirect_uri: http://localhost:8081/login/oath2/code/keycloak
+            keys_host: https://se.scott.mil:8443/realms/cvmtRealm/protocol/openid-connect/token
+            redirect_uri: https://se.scott.mil:8443/login/oath2/code/keycloak
             scope: openid
             grant_type: password
 
